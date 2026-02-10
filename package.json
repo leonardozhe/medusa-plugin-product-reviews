@@ -1,44 +1,54 @@
 {
-  "name": "product-reviews-monorepo",
-  "version": "0.0.0",
-  "description": "A plugin that enables customer product reviews for your Medusa store.",
+  "name": "medusa-plugin-product-reviews",
+  "version": "0.0.23",
+  "description": "A plugin that enables customer product reviews for Medusa v2.13+.",
   "author": "Lambda Curry <team@lambdacurry.dev>",
   "license": "MIT",
-  "private": true,
   "main": "dist/index.js",
-  "workspaces": [
-    "packages/*"
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leonardozhe/medusa-plugin-product-reviews.git"
+  },
+  "keywords": [
+    "medusa",
+    "ecommerce",
+    "product-reviews",
+    "headless"
   ],
   "scripts": {
-    "compose": "turbo compose",
-    "build": "turbo build",
-    "publish": "turbo publish",
-    "dev": "turbo dev"
+    "build": "rm -rf dist && tsc --build",
+    "watch": "tsc --build --watch"
   },
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./admin": {
+      "types": "./dist/admin/index.d.ts",
+      "default": "./dist/admin/index.js"
+    }
+  },
   "dependencies": {
-    "turbo": "1.10.7"
+    "@medusajs/framework": "^2.13.0",
+    "@medusajs/ui": "^4.0.0",
+    "multer": "^1.4.5-lts.1",
+    "cors": "^2.8.5"
+  },
+  "peerDependencies": {
+    "@medusajs/medusa": "^2.13.0",
+    "@medusajs/framework": "^2.13.0",
+    "@medusajs/ui": "^4.0.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.13",
-    "@types/jest": "^27.4.0",
-    "@types/multer": "^1.4.7",
-    "@types/node": "^17.0.8",
-    "cross-env": "^7.0.3",
-    "eslint": "^6.8.0",
-    "rimraf": "^3.0.2",
-    "ts-jest": "^27.0.7",
-    "ts-loader": "^9.2.6",
-    "typescript": "^4.5.2"
-  },
-  "repository": "https://github.com/lambda-curry/medusa-plugin-product-reviews",
-  "keywords": [
-    "sqlite",
-    "ecommerce",
-    "headless",
-    "medusa"
-  ],
-  "packageManager": "yarn@3.6.1"
+    "@medusajs/medusa": "^2.13.0",
+    "@medusajs/framework": "^2.13.0",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  }
 }
