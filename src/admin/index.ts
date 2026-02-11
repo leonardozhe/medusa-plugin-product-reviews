@@ -38,5 +38,8 @@ export default {
       path: "/review-requests",
       icon: "Envelope"
     }
-  ]
+  ],
+
+  // Widgets - explicitly set to empty array
+  widgets: []
 }

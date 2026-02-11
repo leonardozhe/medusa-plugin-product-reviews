@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.31] - 2025-02-11
+
+### Fixed
+- Added empty widgets array to admin/index.ts to satisfy Medusa Admin v2 requirements
+
 ## [0.0.30] - 2025-02-11
 
 ### Fixed
