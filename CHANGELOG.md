@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [0.0.25] - 2025-02-11
 
+### Added
+- Image upload security checks: file type validation, size limits, filename sanitization
+- Maximum file size limit: 5MB per file
+- Maximum files per upload: 5 files
+- Allowed image types: JPEG, PNG, GIF, WebP
+- Path traversal attack prevention in filename handling
+
 ### Changed
 - Updated README.md with Medusa v2.13+ configuration instructions
 - Changed config file reference from `medusa-config.js` to `medusa-config.ts`
