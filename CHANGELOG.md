@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.26] - 2025-02-11
+
+### Fixed
+- Admin white screen caused by missing widgets array export
+- Added proper widgets configuration for Medusa Admin
+
 ## [0.0.25] - 2025-02-11
 
 ### Added
