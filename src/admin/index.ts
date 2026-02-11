@@ -7,7 +7,6 @@
  * @author Lambda Curry <team@lambdacurry.dev>
  * @author Modified for Medusa 2.13 compatibility by leonardozhe
  */
-import { widgets } from "./widgets";
 
 export default {
   id: "product-reviews-admin",
@@ -39,8 +38,5 @@ export default {
       path: "/review-requests",
       icon: "Envelope"
     }
-  ],
-
-  // Widgets for product details page
-  widgets
+  ]
 }

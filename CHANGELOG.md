@@ -2,10 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.30] - 2025-02-11
+
+### Fixed
+- Temporarily removed widgets export from admin/index.ts to isolate white screen issue
+- Routes and menu items will be restored first to ensure basic functionality
+
 ## [0.0.29] - 2025-02-11
 
 ### Fixed
-- Fixed admin white screen issue by properly exporting widgets array in admin/index.ts
+- Fixed admin white screen issue by properly exporting'widgets array in admin/index.ts
 - Widgets are now correctly imported and exported in the default admin extension object
 
 ## [0.0.28] - 2025-02-11
