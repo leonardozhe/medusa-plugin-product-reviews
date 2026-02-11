@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.35] - 2025-02-11
+
+### Fixed
+- Added adminUi field to module.ts for Medusa 2.13 compatibility
+- Removed widgets array from admin extension (not needed in Medusa 2.13)
+- Admin UI is now auto-loaded through moduleProvider adminUi field
+- medusa-config.ts no longer needs admin.extensions configuration
+
+### Changed
+- module.ts now includes adminUi configuration for Medusa 2.13
+- admin/index.ts restored with routes and menuItems (without widgets)
+
 ## [0.0.34] - 2025-02-11
 
 ### Fixed

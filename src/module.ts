@@ -25,12 +25,17 @@ export default {
     ProductReviewService,
     ProductReviewImageService,
     ProductReviewRequestService
-  ],
+   ],
   repositories: [
     ProductReviewRepository,
     ProductReviewRequestRepository
   ],
   migrations: [],
+  adminUi: {
+    // Admin UI extension for Medusa 2.13
+    // The admin extension is declared in the moduleProvider
+    // and auto-loaded by Medusa Admin v2
+  },
   load: async ({ container }) => {
     // Register services in the container
     container.register("productReviewService", ProductReviewService)

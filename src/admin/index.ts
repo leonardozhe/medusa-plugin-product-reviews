@@ -8,6 +8,33 @@
  * @author Modified for Medusa 2.13 compatibility by leonardozhe
  */
 
-// Admin extension disabled for Medusa v2.13
-// Routes and menu items are configured through the main plugin
-export default null
+import { productReviewsRoute, productReviewRequestsRoute } from "./routes"
+
+export default {
+  id: "product-reviews-admin",
+  label: "Product Reviews",
+  routes: [
+    {
+      path: "/reviews",
+      label: "Product Reviews",
+      component: productReviewsRoute
+    },
+    {
+      path: "/review-requests",
+      label: "Review Requests",
+      component: productReviewRequestsRoute
+    }
+  ],
+  menuItems: [
+    {
+      label: "Product Reviews",
+      path: "/reviews",
+      icon: "Stars"
+    },
+    {
+      label: "Review Requests",
+      path: "/review-requests",
+      icon: "Envelope"
+    }
+  ]
+}
