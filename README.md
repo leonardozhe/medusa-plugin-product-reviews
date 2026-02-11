@@ -10,10 +10,10 @@ yarn add @leonardozhe/medusa-plugin-product-reviews
 
 ## Configuration
 
-Add to your `medusa.config.js`:
+Add to your `medusa-config.ts`:
 
-```javascript
-module.exports = {
+```ts
+export default {
   plugins: [
     {
       resolve: "@leonardozhe/medusa-plugin-product-reviews",
@@ -36,20 +36,33 @@ module.exports = {
 Run migrations:
 
 ```bash
-yarn medusa migrations run
+npx medusa db:migrate
 ```
 
 ## API Routes
 
 ### Admin
 - `GET /admin/product-reviews` - List all reviews
+- `POST /admin/product-reviews/:id/approve` - Approve a review
+- `POST /admin/product-reviews/:id/reject` - Reject a review
 - `DELETE /admin/product-reviews/:id` - Delete a review
 - `GET /admin/product-review-requests` - List review requests
 
 ### Store
-- `GET /store/product-reviews` - List product reviews (public)
-- `POST /store/product-reviews` - Create a review
+- `GET /store/product-reviews` - List product reviews (only approved reviews)
+- `POST /store/product-reviews` - Create a review (status defaults to "pending")
 - `POST /store/product-review-image-upload` - Upload review image
+
+## Review Moderation
+
+Reviews are created with status "pending" by default. Only approved reviews are shown on the storefront. Use the admin panel to approve or reject reviews.
+
+## Configuration Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `auto_approve` | boolean | false | Automatically approve new reviews |
+| `max_images` | number | 5 | Maximum images per review |
 
 ## License
 
@@ -61,4 +74,4 @@ https://github.com/leonardozhe/medusa-plugin-product-reviews
 
 ---
 
-Original author: Lambda Curry
+Original author: Lambda Curry <team@lambdacurry.dev>
