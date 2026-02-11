@@ -18,6 +18,6 @@
     "jsx": "react-jsx",
     "esModuleInterop": true
   },
-  "include": [".env", "src", "medusa-config.js", "package.json"],
+  "include": ["src"],
   "exclude": ["dist", "node_modules", "**/*.spec.ts"]
 }

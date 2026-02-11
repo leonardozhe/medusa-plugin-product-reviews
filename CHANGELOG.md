@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.32] - 2025-02-11
+
+### Fixed
+- Fixed tsconfig.json to exclude medusa-config.js and package.json from build
+- This prevented incorrect compilation output and admin extension loading issues
+
 ## [0.0.31] - 2025-02-11
 
 ### Fixed
