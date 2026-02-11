@@ -13,8 +13,10 @@ yarn add @leonardozhe/medusa-plugin-product-reviews
 Add to your `medusa-config.ts`:
 
 ```ts
-export default {
-  plugins: [
+import { defineConfig } from "@medusajs/framework/utils"
+
+export default defineConfig({
+  modules: [
     {
       resolve: "@leonardozhe/medusa-plugin-product-reviews",
       options: {
@@ -23,14 +25,9 @@ export default {
       }
     }
   ],
-  admin: {
-    extensions: [
-      {
-        resolve: "@leonardozhe/medusa-plugin-product-reviews/admin"
-      }
-    ]
-  }
-}
+  // Admin UI is automatically loaded via module.ts adminUi field
+  // No need for admin.extensions configuration
+})
 ```
 
 Run migrations:
