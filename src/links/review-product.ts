@@ -13,3 +13,5 @@ export default defineLink(
     readOnly: true,
   }
 )
+
+export const LINK_NAME = "review-product-link"

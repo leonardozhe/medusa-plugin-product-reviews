@@ -13,20 +13,71 @@ A complete product review plugin for Medusa 2.13, supporting review creation, mo
 
 ## Installation
 
-### Option 1: Copy Files to Your Medusa Project
+### Option 1: Install from GitHub (Recommended)
 
-#### 1. Copy the `src` directory
+Install directly from GitHub using your preferred package manager:
 
-Copy the entire `src` directory from this plugin to your Medusa project's `src` directory:
+#### Using npm
+```bash
+npm install github:leonardozhe/medusa-plugin-product-reviews
+```
+
+#### Using yarn
+```bash
+yarn add github:leonardozhe/medusa-plugin-product-reviews
+```
+
+#### Using pnpm
+```bash
+pnpm add github:leonardozhe/medusa-plugin-product-reviews
+```
+
+Then configure in `medusa-config.ts`:
+
+```typescript
+module.exports = defineConfig({
+  // ...
+  modules: [
+    // ... other modules
+    {
+      resolve: "medusa-plugin-product-reviews",
+    },
+  ],
+})
+```
+
+Run migrations:
+```bash
+# Using npm
+npm run db:migrate
+
+# Using yarn
+yarn db:migrate
+
+# Using pnpm
+pnpm db:migrate
+```
+
+Restart your server.
+
+---
+
+### Option 2: Clone and Copy Files
+
+Clone the repository and copy files to your Medusa project:
 
 ```bash
-# If this plugin is cloned locally
+git clone https://github.com/leonardozhe/medusa-plugin-product-reviews.git
+cd medusa-plugin-product-reviews
+```
+
+Copy the `src` directory to your Medusa project:
+
+```bash
 cp -r src/ /path/to/your/medusa/project/src/
 ```
 
-#### 2. Configure medusa-config.ts
-
-Add the module configuration in your `medusa-config.ts`:
+Configure in `medusa-config.ts`:
 
 ```typescript
 module.exports = defineConfig({
@@ -40,66 +91,23 @@ module.exports = defineConfig({
 })
 ```
 
-#### 3. Generate and run database migrations
+Generate and run migrations:
 
 ```bash
+# Using npm
 npm run db:generate productReview
 npm run db:migrate
-```
 
-Or using yarn:
-
-```bash
+# Using yarn
 yarn db:generate productReview
 yarn db:migrate
-```
 
-Or using pnpm:
-
-```bash
+# Using pnpm
 pnpm db:generate productReview
 pnpm db:migrate
 ```
 
-#### 4. Restart your Medusa server
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
----
-
-### Option 2: Install as a Package (Future)
-
-This plugin can also be published as an npm package for easier installation:
-
-```bash
-# Using npm
-npm install medusa-plugin-product-reviews
-
-# Using yarn
-yarn add medusa-plugin-product-reviews
-
-# Using pnpm
-pnpm add medusa-plugin-product-reviews
-```
-
-Then configure in `medusa-config.ts`:
-
-```typescript
-module.exports = defineConfig({
-  // ...
-  modules: [
-    {
-      resolve: "medusa-plugin-product-reviews",
-    },
-  ],
-})
-```
+Restart your server.
 
 ## API Routes
 
@@ -282,7 +290,7 @@ curl -X POST 'http://localhost:9000/auth/customer/emailpass/register' \
 curl -X POST 'http://localhost:9000/store/customers' \
   -H 'Authorization: Bearer {token}' \
   -H 'Content-Type: application/json' \
-  -H 'x-publishable-api-key: {api_key}'' \
+  -H 'x-publishable-api-key: {api_key}' \
   --data-raw '{
     "email": "test@example.com"
   }'
@@ -328,3 +336,7 @@ curl -X POST 'http://localhost:9000/admin/reviews/status' \
 ## License
 
 MIT
+
+## GitHub Repository
+
+https://github.com/leonardozhe/medusa-plugin-product-reviews
