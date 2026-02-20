@@ -13,71 +13,24 @@ A complete product review plugin for Medusa 2.13, supporting review creation, mo
 
 ## Installation
 
-### Option 1: Install from GitHub (Recommended)
-
-Install directly from GitHub using your preferred package manager:
-
-#### Using npm
-```bash
-npm install github:leonardozhe/medusa-plugin-product-reviews
-```
-
-#### Using yarn
-```bash
-yarn add github:leonardozhe/medusa-plugin-product-reviews
-```
-
-#### Using pnpm
-```bash
-pnpm add github:leonardozhe/medusa-plugin-product-reviews
-```
-
-Then configure in `medusa-config.ts`:
-
-```typescript
-module.exports = defineConfig({
-  // ...
-  modules: [
-    // ... other modules
-    {
-      resolve: "medusa-plugin-product-reviews",
-    },
-  ],
-})
-```
-
-Run migrations:
-```bash
-# Using npm
-npm run db:migrate
-
-# Using yarn
-yarn db:migrate
-
-# Using pnpm
-pnpm db:migrate
-```
-
-Restart your server.
-
----
-
-### Option 2: Clone and Copy Files
-
-Clone the repository and copy files to your Medusa project:
+### Step 1: Clone the repository
 
 ```bash
 git clone https://github.com/leonardozhe/medusa-plugin-product-reviews.git
 cd medusa-plugin-product-reviews
 ```
 
-Copy the `src` directory to your Medusa project:
+### Step 2: Copy files to your Medusa project
+
+Copy the entire `src` directory to your Medusa project:
 
 ```bash
 cp -r src/ /path/to/your/medusa/project/src/
 ```
 
-Configure in `medusa-config.ts`:
+### Step 3: Configure medusa-config.ts
+
+Add the module configuration in your `medusa-config.ts`:
 
 ```typescript
 module.exports = defineConfig({
@@ -91,23 +44,40 @@ module.exports = defineConfig({
 })
 ```
 
-Generate and run migrations:
+### Step 4: Generate and run database migrations
 
 ```bash
 # Using npm
-npm run db:generate productReview
+npx medusa db:generate productReview
 npm run db:migrate
 
 # Using yarn
-yarn db:generate productReview
+npx medusa db:generate productReview
 yarn db:migrate
 
 # Using pnpm
-pnpm db:generate productReview
+npx medusa db:generate productReview
 pnpm db:migrate
 ```
 
-Restart your server.
+**Note**: If `db:migrate` is not available in your scripts, use:
+
+```bash
+npx medusa db:migrate
+```
+
+### Step 5: Restart your Medusa server
+
+```bash
+# Using npm
+npm run dev
+
+# Using yarn
+yarn dev
+
+# Using pnpm
+pnpm dev
+```
 
 ## API Routes
 
