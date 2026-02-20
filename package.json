@@ -3,20 +3,7 @@
   "version": "1.0.0",
   "description": "Complete product review plugin for Medusa 2.13",
   "main": "index.js",
-  "exports": {
-    ".": "./src/index.ts",
-    "./modules/product-review": "./src/modules/product-review/index.ts",
-    "./links/review-product": "./src/links/re/review-product.ts",
-    "./api/middlewares": "./src/api/middlewares.ts",
-    "./admin/lib/sdk": "./src/admin/lib/sdk.ts",
-    "./admin/routes/reviews": "./src/admin/routes/reviews/page.tsx",
-    "./workflows/create-review": "./src/workflows/create-review.ts",
-    "./workflows/update-review": "./src/workflows/update-review.ts"
-  },
-  "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/leonardozhe/medusa-plugin-product-reviews.git"
@@ -42,8 +29,5 @@
   },
   "files": [
     "src"
-  ],
-  "publishConfig": {
-    "access": "public"
-  }
+  ]
 }
