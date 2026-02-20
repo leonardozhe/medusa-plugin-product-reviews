@@ -13,37 +13,92 @@ A complete product review plugin for Medusa 2.13, supporting review creation, mo
 
 ## Installation
 
-### 1. Copy the plugin to your Medusa project
+### Option 1: Copy Files to Your Medusa Project
 
-Copy the contents of the `src` directory to the `src` directory of your Medusa project.
+#### 1. Copy the `src` directory
 
-### 2. Configure medusa-config.ts
+Copy the entire `src` directory from this plugin to your Medusa project's `src` directory:
 
-Add the module configuration in `medusa-config.ts`:
+```bash
+# If this plugin is cloned locally
+cp -r src/ /path/to/your/medusa/project/src/
+```
+
+#### 2. Configure medusa-config.ts
+
+Add the module configuration in your `medusa-config.ts`:
+
+```typescript
+module.exports = defineConfig({
+  // ...
+  modules: [
+    // ... other modules
+    {
+      resolve: "./src/modules/product-review",
+    },
+  ],
+})
+```
+
+#### 3. Generate and run database migrations
+
+```bash
+npm run db:generate productReview
+npm run db:migrate
+```
+
+Or using yarn:
+
+```bash
+yarn db:generate productReview
+yarn db:migrate
+```
+
+Or using pnpm:
+
+```bash
+pnpm db:generate productReview
+pnpm db:migrate
+```
+
+#### 4. Restart your Medusa server
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
+
+---
+
+### Option 2: Install as a Package (Future)
+
+This plugin can also be published as an npm package for easier installation:
+
+```bash
+# Using npm
+npm install medusa-plugin-product-reviews
+
+# Using yarn
+yarn add medusa-plugin-product-reviews
+
+# Using pnpm
+pnpm add medusa-plugin-product-reviews
+```
+
+Then configure in `medusa-config.ts`:
 
 ```typescript
 module.exports = defineConfig({
   // ...
   modules: [
     {
-      resolve: "./src/modules/product-review",
-",
+      resolve: "medusa-plugin-product-reviews",
     },
   ],
 })
-```
-
-### 3. Generate and run database migrations
-
-```bash
-npx medusa db:generate productReview
-npx medusa db:migrate
-```
-
-### 4. Restart the server
-
-```bash
-npm run dev
 ```
 
 ## API Routes
@@ -51,11 +106,12 @@ npm run dev
 ### Store API
 
 #### POST /store/reviews
+
 Create a product review (requires customer authentication)
 
 **Request Headers**:
 - `x-publishable-api-key`: Publishable API Key
-- `Authorization`: Bearer Token
+- `Authorization`: Bearer Token (customer session token)
 
 **Request Body**:
 ```json
@@ -69,8 +125,29 @@ Create a product review (requires customer authentication)
 }
 ```
 
+**Response**:
+```json
+{
+  "review": {
+    "id": "string",
+    "title": "string",
+    "content": "string",
+    "rating": 5,
+    "product_id": "string",
+    "customer_id": "string",
+    "status": "pending",
+    "created_at": "2024-01-01T00:00:00.000Z",
+    "updated_at": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
 #### GET /store/products/:id/reviews
+
 Fetch approved reviews for a specific product
+
+**Request Headers**:
+- `x-publishable-api-key`: Publishable API Key
 
 **Query Parameters**:
 - `limit`: Number of items per page (default: 10)
@@ -80,29 +157,64 @@ Fetch approved reviews for a specific product
 **Response**:
 ```json
 {
-  "reviews": [...],
-  "count": "number",
-  "limit": "number",
-  "offset": "number",
-  "average_rating": "number"
+  "reviews": [
+    {
+      "id": "string",
+      "title": "string",
+      "content": "string",
+      "rating": 5,
+      "first_name": "string",
+      "last_name": "string",
+      "created_at": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "count": 100,
+  "limit": 10,
+  "offset": 0,
+  "average_rating": 4.5
 }
 ```
 
 ### Admin API
 
 #### GET /admin/reviews
+
 Fetch all reviews (requires admin authentication)
 
+**Request Headers**:
+- `Authorization`: Bearer Token (admin session token)
+
+**Query Parameters**:
+- `limit`: Number of items per page (default: 20)
+- `offset`: Number of items to skip (default: 0)
+- `order`: Sort order (default: -created_at)
+
+**Response**:
+```json
+{
+  "reviews": [...],
+  "count": 100,
+  "limit": 20,
+  "offset": 0
+}
+```
+
 #### POST /admin/reviews/status
+
 Approve or reject reviews (batch operation)
+
+**Request Headers**:
+- `Authorization`: Bearer Token (admin session token)
 
 **Request Body**:
 ```json
 {
-  "ids": ["string"],
-  "status": "approved | rejected | pending"
+  "ids": ["review_id_1", "review_id_2"],
+  "status": "approved"
 }
 ```
+
+**Status Options**: `pending` | `approved` | `rejected`
 
 ## Data Model
 
@@ -170,7 +282,7 @@ curl -X POST 'http://localhost:9000/auth/customer/emailpass/register' \
 curl -X POST 'http://localhost:9000/store/customers' \
   -H 'Authorization: Bearer {token}' \
   -H 'Content-Type: application/json' \
-  -H 'x-publishable-api-key: {api_key}' \
+  -H 'x-publishable-api-key: {api_key}'' \
   --data-raw '{
     "email": "test@example.com"
   }'
