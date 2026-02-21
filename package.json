@@ -1,5 +1,5 @@
 {
-  "name": "medusa-plugin-product-reviews",
+  "name": "@leonardozhe/medusa-plugin-product-reviews",
   "version": "1.0.0",
   "description": "Complete product review plugin for Medusa 2.13",
   "repository": {
@@ -27,5 +27,9 @@
   },
   "files": [
     "src"
-  ]
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./admin": "./src/index.ts"
+  }
 }

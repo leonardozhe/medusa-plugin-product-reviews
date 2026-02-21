@@ -3,3 +3,10 @@
 
 export { default as ProductReviewModule } from "./modules/product-review"
 export { PRODUCT_REVIEW_MODULE } from "./modules/product-review"
+
+// Export admin routes configuration
+export const admin = {
+  routes: [
+    import("./admin/routes/reviews/page.js"),
+  ],
+}

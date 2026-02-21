@@ -1,7 +1,7 @@
 "use client"
 
 import { Link } from "react-router-dom"
-import { useState, useMemo, useEffect } from "react"
+import { useState, useMemo } from "react"
 import { useQuery } from "@tanstack/react-query"
 import {
   Container,
@@ -10,13 +10,15 @@ import {
   createDataTableColumnHelper,
   createDataTableCommandHelper,
   DataTableRowSelectionState,
+  DataTablePaginationState,
+  useDataTable,
   Button,
   StatusBadge,
   toast,
   Toaster,
 } from "@medusajs/ui"
 import { ChatBubbleLeftRight } from "@medusajs/icons"
-import { defineRouteConfig } from "@medusajs/framework-sdk"
+import { defineRouteConfig } from "@medusajs/admin-sdk"
 import { sdk } from "../../lib/sdk"
 import type { HttpTypes } from "@medusajs/types"
 
@@ -100,7 +102,6 @@ const useCommands = (refetch: () => void) => {
           toast.error("Failed to approve reviews")
         })
       },
-      badge: "Green",
     }),
     commandHelper.command({
       label: "Reject",
@@ -121,7 +122,6 @@ const useCommands = (refetch: () => void) => {
           toast.error("Failed to reject reviews")
         })
       },
-      badge: "Red",
     }),
   ]
 }

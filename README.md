@@ -13,38 +13,48 @@ A complete product review plugin for Medusa 2.13, supporting review creation, mo
 
 ## Installation
 
-### Step 1: Clone the repository
+### Step 1: Install the plugin
 
 ```bash
-git clone https://github.com/leonardozhe/medusa-plugin-product-reviews.git
-cd medusa-plugin-product-reviews
+cd your-medusa-project
+
+# Using npm
+npm install @leonardozhe/medusa-plugin-product-reviews --legacy-peer-deps
+
+# Using yarn
+yarn add @leonardozhe/medusa-plugin-product-reviews
+
+# Using pnpm
+pnpm add @leonardozhe/medusa-plugin-product-reviews
 ```
 
-### Step 2: Copy files to your Medusa project
+### Step 2: Configure medusa-config.ts
 
-Copy the entire `src` directory to your Medusa project:
-
-```bash
-cp -r src/ /path/to/your/medusa/project/src/
-```
-
-### Step 3: Configure medusa-config.ts
-
-Add the module configuration in your `medusa-config.ts`:
+Add the plugin to your `medusa-config.ts`:
 
 ```typescript
+import { loadEnv, defineConfig } from '@medusajs/framework/utils'
+
+loadEnv(process.env.NODE_ENV || 'development', process.cwd())
+
 module.exports = defineConfig({
-  // ...
+  projectConfig: {
+    // ... your existing configuration
+  },
+  admin: {
+    disable: process.env.DISABLE_MEDUSA_ADMIN === "true",
+    // ... your admin configuration
+  },
   modules: [
     // ... other modules
     {
-      resolve: "./src/modules/product-review",
+      resolve: "@leonardozhe/medusa-plugin-product-reviews",
     },
   ],
 })
 ```
 
-### Step 4: Generate and run database migrations
+### Step 3: Generate and run database migrations
 
 ```bash
 # Using npm
@@ -66,9 +76,12 @@ pnpm db:migrate
 npx medusa db:migrate
 ```
 
-### Step 5: Restart your Medusa server
+### Step 4: Build and restart your Medusa server
 
 ```bash
+# Build the project
+npm run build
+
 # Using npm
 npm run dev
 
@@ -78,6 +91,10 @@ yarn dev
 # Using pnpm
 pnpm dev
 ```
+
+### Step 5: Access the reviews page
+
+Navigate to `http://localhost:9000/app/reviews` in your admin dashboard to manage reviews.
 
 ## API Routes
 
@@ -211,37 +228,6 @@ Approve or reject reviews (batch operation)
 | customer_id | string? | Customer ID (optional) |
 | created_at | datetime | Creation timestamp |
 | updated_at | datetime | Update timestamp |
-
-## File Structure
-
-```
-src/
-├── modules/
-│   └── product-review/
-│       ├── models/
-│       │   └── review.ts
-│       ├── service.ts
-│       └── index.ts
-├── links/
-│   └── review-product.ts
-├── workflows/
-│   ├── create-review.ts
-│   ├── update-review.ts
-│   └── steps/
-│       ├── create-review.ts
-│       └── update-review.ts
-├── api/
-│   ├── store/
-│   │   ├── reviews/route.ts
-│   │   └── products/[id]/reviews/route.ts
-│   ├── admin/
-│   │   ├── reviews/route.ts
-│   │   └── reviews/status/route.ts
-│   └── middlewares.ts
-└── admin/
-    ├── lib/sdk.ts
-    └── routes/reviews/page.tsx
-```
 
 ## Testing
 

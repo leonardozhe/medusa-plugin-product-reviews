@@ -3,9 +3,8 @@ import {
   MedusaRequest,
   MedusaResponse,
 } from "@medusajs/framework/http"
-import { ContainerRegistrationKeys } from "@medusajs/framework"
-import { PRODUCT_REVIEW_MODULE } from "../../../modules/product-review"
-import ProductReviewModuleService from "../../../modules/product-review/service"
+import { Modules } from "@medusajs/framework/utils"
+import ProductReviewModuleService from "../../../../modules/product-review/service"
 
 export const GetStoreReviewsSchema = createFindParams()
 
@@ -15,8 +14,8 @@ export const GET = async (
 ) => {
   const { id } = req.params
 
-  const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
-  const reviewModuleService: ProductReviewModuleService = req.scope.resolve(PRODUCT_REVIEW_MODULE)
+  const query = req.scope.resolve(Modules.QUERY)
+  const reviewModuleService: ProductReviewModuleService = req.scope.resolve("productReviewModuleService")
 
   // Get reviews for product
   const { data: reviews, metadata: {
