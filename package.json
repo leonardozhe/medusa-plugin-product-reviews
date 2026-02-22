@@ -1,7 +1,6 @@
 {
   "name": "@leonardozhe/medusa-plugin-product-reviews",
-  "version": "1.0.7",
-  "type": "module",
+  "version": "1.0.8",
   "description": "Complete product review plugin for Medusa 2.13",
   "repository": {
     "type": "git",
