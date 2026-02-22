@@ -27,9 +27,5 @@
   },
   "files": [
     "src"
-  ],
-  "exports": {
-    ".": "./src/index.ts",
-    "./admin": "./src/index.ts"
-  }
+  ]
 }
