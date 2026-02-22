@@ -92,6 +92,25 @@ yarn dev
 pnpm dev
 ```
 
+**Troubleshooting**: If you encounter build errors after updating the plugin, try clearing the npm cache:
+
+```bash
+# Uninstall the plugin first
+npm uninstall @leonardozhe/medusa-plugin-product-reviews
+
+# Clear npm cache
+npm cache clean --force
+
+# Reinstall the plugin
+npm install @leonardozhe/medusa-plugin-product-reviews --legacy-peer-deps
+
+# Clear Medusa build cache
+rm -rf .medusa
+
+# Rebuild
+npm run build
+```
+
 ### Step 5: Access the reviews page
 
 Navigate to `http://localhost:9000/app/reviews` in your admin dashboard to manage reviews.
